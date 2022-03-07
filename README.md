@@ -7,3 +7,8 @@
 
 <h4>Run dev</h4>
 CompileDaemon --build="go build ./cmd/main.go" --command=./main.exe
+
+<p>
+:: install [go get github.com/githubnemo/CompileDaemon]<br/>
+go get github.com/githubnemo/CompileDaemon <br/>
+</p>
