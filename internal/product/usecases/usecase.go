@@ -75,7 +75,7 @@ func (p *productUC) Catagory(catagory *[]models.Product_catagory) error {
 
 func (p *productUC) GetProduct(ctx context.Context, filter *models.ProductFilter, products *[]models.Product) error {
 	// logic switch db or cache.
-	key := fmt.Sprintf("product_key_%s_%s_%s_%s_%s_%s", filter.Name, filter.Gender, filter.Catagory, filter.Size, filter.Limit, filter.Offset)
+	key := fmt.Sprintf("product_key_%s_%s_%s_%s_%s_%s_%s", filter.Name, filter.Gender, filter.Catagory, filter.Size, filter.Limit, filter.Offset, filter.OrderBy)
 	// check cache
 	err := p.productRepo.GetCache(ctx, key, products)
 
