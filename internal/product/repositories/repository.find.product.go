@@ -5,25 +5,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"shirt-shop/internal/models"
-	"shirt-shop/internal/product"
 	"strings"
 
-	"github.com/go-redis/redis/v8"
 	"go.elastic.co/apm"
-	"gorm.io/gorm"
 )
 
-type ProductRepo struct {
-	conn  *gorm.DB
-	cache *redis.Client
-}
-
-func NewProductRepository(db *gorm.DB, cache *redis.Client) product.RopoInterface {
-	return &ProductRepo{
-		conn:  db,
-		cache: cache,
-	}
-}
 func (db *ProductRepo) GetProductById(pid int, product *models.Product) error {
 	// find one product
 	result := db.conn.Table(models.ProductTname).Find(&product, "id = ?", pid)
@@ -89,22 +75,6 @@ func (db *ProductRepo) GetProductyBy(filter *models.ProductFilter, products *[]m
 			ON pds.product_size_id = pd.size
 		WHERE ` + condition + ` ` + query + `
 	`).Scan(&products)
-	if result.Error != nil {
-		return result.Error
-	}
-	return nil
-}
-
-func (db *ProductRepo) InsertProduct(product *models.ProductForm) error {
-	result := db.conn.Table(models.ProductTname).Select(
-		"Name",
-		"Catagory",
-		"Size",
-		"Gender",
-		"Price",
-		"Quantiry",
-		"Ispadding",
-	).Create(&product)
 	if result.Error != nil {
 		return result.Error
 	}

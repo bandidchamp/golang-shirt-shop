@@ -5,17 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"shirt-shop/internal/models"
-	"shirt-shop/internal/product"
 	"strconv"
 )
-
-type productUC struct {
-	productRepo product.RopoInterface
-}
-
-func NewProductUseCase(productRepo product.RopoInterface) product.UCInterface {
-	return &productUC{productRepo: productRepo}
-}
 
 func (p *productUC) CheckProductID(ctxId string) (*models.Product, error) {
 	id, err := strconv.Atoi(ctxId)
@@ -41,14 +32,6 @@ func (p *productUC) CheckProductALL() (*[]models.Product, error) {
 		return nil, Repoerror
 	}
 	return &product, nil
-}
-
-func (p *productUC) InsertProduct(productF *models.ProductForm) error {
-	Repoerror := p.productRepo.InsertProduct(productF)
-	if Repoerror != nil {
-		return Repoerror
-	}
-	return nil
 }
 
 func (p *productUC) Size(size *[]models.Product_size) error {

@@ -4,22 +4,10 @@ import (
 	"fmt"
 	"shirt-shop/interfaces"
 	"shirt-shop/internal/models"
-	"shirt-shop/internal/product"
 
 	"github.com/gofiber/fiber/v2"
 	"go.elastic.co/apm"
 )
-
-type productHandler struct {
-	productUC product.UCInterface
-}
-
-func NewProductHandler(productUC product.UCInterface) product.Handler {
-
-	return &productHandler{
-		productUC: productUC,
-	}
-}
 
 func (ph *productHandler) GetProductById(c *fiber.Ctx) error {
 	pid := c.FormValue("id")
@@ -51,33 +39,6 @@ func (ph *productHandler) GetProductAll(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadGateway).JSON(payload)
 	}
 	return c.Status(200).JSON(fiber.Map{"productAll": product})
-}
-
-func (ph *productHandler) InsertProduct(c *fiber.Ctx) error {
-
-	var params models.ProductForm
-	params = models.ProductForm{
-		Name:      c.FormValue("name"),
-		Catagory:  c.FormValue("catagory"),
-		Size:      c.FormValue("size"),
-		Gender:    c.FormValue("gender"),
-		Price:     c.FormValue("price"),
-		Quantiry:  c.FormValue("quantity"),
-		Ispadding: "0",
-	}
-
-	err := ph.productUC.InsertProduct(&params)
-	if err != nil {
-		var payload interfaces.ResponsePayload
-		payload = interfaces.ResponsePayload{
-			Code:    fiber.StatusBadGateway,
-			Status:  false,
-			Message: fmt.Sprint(err),
-			Payload: nil,
-		}
-		return c.Status(fiber.StatusBadGateway).JSON(payload)
-	}
-	return c.Status(200).JSON(fiber.Map{"result": "ok"})
 }
 
 func (ph *productHandler) Size(c *fiber.Ctx) error {
