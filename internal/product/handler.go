@@ -14,4 +14,5 @@ type Handler interface {
 	GetProductFilter(c *fiber.Ctx) error
 	UpdateProduct(c *fiber.Ctx) error
 	PaddingProduct(c *fiber.Ctx) error
+	AsyncFunc(c *fiber.Ctx) error
 }

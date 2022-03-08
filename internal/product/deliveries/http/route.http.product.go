@@ -19,4 +19,6 @@ func MapProductRoute(r fiber.Router, h product.Handler) {
 	r.Get("/size", middleware.Authentication(), h.Size)
 	r.Get("/gender", middleware.Authentication(), h.Gender)
 	r.Get("/catagory", middleware.Authentication(), h.Catagory)
+
+	r.Post("/aysnc", middleware.Authentication(), h.AsyncFunc)
 }

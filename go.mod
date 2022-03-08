@@ -10,6 +10,9 @@ require (
 	github.com/elastic/go-licenser v0.4.0 // indirect
 	github.com/elastic/go-sysinfo v1.7.1 // indirect
 	github.com/elastic/go-windows v1.0.1 // indirect
+	github.com/fatih/color v1.9.0 // indirect
+	github.com/fsnotify/fsnotify v1.4.9 // indirect
+	github.com/githubnemo/CompileDaemon v1.4.0 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
@@ -25,8 +28,11 @@ require (
 	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/klauspost/compress v1.15.0 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
+	github.com/mattn/go-colorable v0.1.4 // indirect
+	github.com/mattn/go-isatty v0.0.11 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
+	github.com/radovskyb/watcher v1.0.7 // indirect
 	github.com/santhosh-tekuri/jsonschema v1.2.4 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.33.0 // indirect
