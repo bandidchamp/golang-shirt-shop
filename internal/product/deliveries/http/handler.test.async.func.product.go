@@ -27,7 +27,7 @@ func testThread(i int) {
 }
 
 func FindProduct(phh *productHandler, id string, c chan models.Product, i int) {
-	fmt.Println("query product", i)
+	// fmt.Println("query product", i)
 	productS, err := phh.productUC.CheckProductID(id)
 	if err != nil {
 		fmt.Println(err)
@@ -45,54 +45,54 @@ func (ph *productHandler) AsyncFunc(c *fiber.Ctx) error {
 
 	productChannel := make(chan models.Product)
 
-	var ssssss []models.Product
+	var resultproductChannel []models.Product
 
 	for i, val := range payload.Ids {
 		go FindProduct(ph, strconv.FormatInt(int64(val), 10), productChannel, i)
 		// fmt.Println(<-prodmap)
-		ssssss = append(ssssss, <-productChannel)
+		resultproductChannel = append(resultproductChannel, <-productChannel)
 	}
 
-	fmt.Println("-----------------------")
-	fmt.Println(ssssss)
-	fmt.Println("-----------------------")
+	// fmt.Println("-----------------------")
+	// fmt.Println(resultproductChannel)
+	// fmt.Println("-----------------------")
 
-	age1 := make(chan int)
-	age2 := make(chan int)
+	// age1 := make(chan int)
+	// age2 := make(chan int)
 
-	fmt.Println("start async function 1 2")
+	// fmt.Println("start async function 1 2")
 
-	go aaa1(5, age1)
-	go aaa2(6, age2)
+	// go aaa1(5, age1)
+	// go aaa2(6, age2)
 
-	for i := 1; i < 10; i++ {
-		// multithreading
-		go testThread(i)
-	}
+	// for i := 1; i < 10; i++ {
+	// 	// multithreading
+	// 	go testThread(i)
+	// }
 
-	// wait until return
-	proson_age2 := <-age2
-	proson_age1 := <-age1
-	fmt.Println("wait until aaa1 and aaa2 return")
-	fmt.Println("proson age : ", proson_age1)
-	fmt.Println("proson age : ", proson_age2)
+	// // wait until return
+	// proson_age2 := <-age2
+	// proson_age1 := <-age1
+	// fmt.Println("wait until aaa1 and aaa2 return")
+	// fmt.Println("proson age : ", proson_age1)
+	// fmt.Println("proson age : ", proson_age2)
 
-	product := make(chan map[int]int)
-	// product
+	// product := make(chan map[int]int)
+	// // product
 
-	go func() {
-		mappy := make(map[int]int)
-		for i := 0; i < 10; i++ {
-			mappy[i] = i + 10
-		}
-		product <- mappy
-		close(product)
-	}()
+	// go func() {
+	// 	mappy := make(map[int]int)
+	// 	for i := 0; i < 10; i++ {
+	// 		mappy[i] = i + 10
+	// 	}
+	// 	product <- mappy
+	// 	close(product)
+	// }()
 
-	products := <-product
-	fmt.Println("Product channel ", products)
-	for pd := range products {
-		fmt.Println("Product : ", pd)
-	}
-	return c.Status(200).JSON(fiber.Map{"result": ssssss})
+	// products := <-product
+	// fmt.Println("Product channel ", products)
+	// for pd := range products {
+	// 	fmt.Println("Product : ", pd)
+	// }
+	return c.Status(200).JSON(fiber.Map{"result": resultproductChannel})
 }
