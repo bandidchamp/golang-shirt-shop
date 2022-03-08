@@ -57,12 +57,13 @@ func (ph *productHandler) InsertProduct(c *fiber.Ctx) error {
 
 	var params models.ProductForm
 	params = models.ProductForm{
-		Name:     c.FormValue("name"),
-		Catagory: c.FormValue("catagory"),
-		Size:     c.FormValue("size"),
-		Gender:   c.FormValue("gender"),
-		Price:    c.FormValue("price"),
-		Quantiry: c.FormValue("quantity"),
+		Name:      c.FormValue("name"),
+		Catagory:  c.FormValue("catagory"),
+		Size:      c.FormValue("size"),
+		Gender:    c.FormValue("gender"),
+		Price:     c.FormValue("price"),
+		Quantiry:  c.FormValue("quantity"),
+		Ispadding: "0",
 	}
 
 	err := ph.productUC.InsertProduct(&params)

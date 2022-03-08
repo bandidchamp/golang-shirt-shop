@@ -17,12 +17,13 @@ type Product struct {
 }
 
 type ProductForm struct {
-	Name     string `json:"name"`
-	Catagory string `json:"catagory"`
-	Size     string `json:"size"`
-	Gender   string `json:"gender"`
-	Price    string `json:"price"`
-	Quantiry string `json:"quantity"`
+	Name      string `json:"name"`
+	Catagory  string `json:"catagory"`
+	Size      string `json:"size"`
+	Gender    string `json:"gender"`
+	Price     string `json:"price"`
+	Quantiry  string `json:"quantity"`
+	Ispadding string `json:"ispadding"`
 }
 
 type Product_size struct {

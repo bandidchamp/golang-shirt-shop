@@ -47,6 +47,8 @@ func (db *ProductRepo) GetProductyBy(filter *models.ProductFilter, products *[]m
 
 	var query string
 
+	sliceCon = append(sliceCon, `1=1`)
+
 	if filter.Name != "" {
 		sliceCon = append(sliceCon, `pd.name LIKE "%`+filter.Name+`%"`)
 	}
@@ -60,8 +62,10 @@ func (db *ProductRepo) GetProductyBy(filter *models.ProductFilter, products *[]m
 	}
 
 	if filter.Size != "" {
-		sliceCon = append(sliceCon, `pd.name = `+filter.Size+``)
+		sliceCon = append(sliceCon, `pd.size = `+filter.Size+``)
 	}
+
+	sliceCon = append(sliceCon, `ispadding = 0`)
 
 	// sliceCon concat ADN logic here.
 	condition := strings.Join(sliceCon, " AND ")
@@ -99,6 +103,7 @@ func (db *ProductRepo) InsertProduct(product *models.ProductForm) error {
 		"Gender",
 		"Price",
 		"Quantiry",
+		"Ispadding",
 	).Create(&product)
 	if result.Error != nil {
 		return result.Error
