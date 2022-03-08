@@ -44,7 +44,7 @@ func (s *Server) MapHandlers(a *fiber.App) error {
 
 	//* Product group.
 	productGroup := v1.Group("/products")
-	productRepo := productRepository.NewProductRepository(s.db)
+	productRepo := productRepository.NewProductRepository(s.db, s.cache)
 	productUC := productUseCase.NewProductUseCase(productRepo)
 	productHandler := productHttp.NewProductHandler(productUC)
 	productHttp.MapProductRoute(productGroup, productHandler)

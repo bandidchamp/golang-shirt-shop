@@ -1,7 +1,9 @@
 package usecases
 
 import (
+	"context"
 	"errors"
+	"fmt"
 	"shirt-shop/internal/models"
 	"shirt-shop/internal/product"
 	"strconv"
@@ -25,7 +27,7 @@ func (p *productUC) CheckProductID(ctxId string) (*models.Product, error) {
 		return nil, err
 	}
 	var product models.Product
-	Repoerror := p.productRepo.GetProductOne(id, &product)
+	Repoerror := p.productRepo.GetProductById(id, &product)
 	if Repoerror != nil {
 		return nil, Repoerror
 	}
@@ -68,5 +70,36 @@ func (p *productUC) Catagory(catagory *[]models.Product_catagory) error {
 	if Repoerror != nil {
 		return Repoerror
 	}
+	return nil
+}
+
+func (p *productUC) GetProduct(ctx context.Context, filter *models.ProductFilter, products *[]models.Product) error {
+	// logic switch db or cache.
+	key := fmt.Sprintf("product_key_%s_%s_%s_%s_%s_%s", filter.Name, filter.Gender, filter.Catagory, filter.Size, filter.Limit, filter.Offset)
+	// check cache
+	err := p.productRepo.GetCache(ctx, key, products)
+
+	// if cache have error.
+	if err != nil && errors.Unwrap(err).Error() != "redis: nil" {
+		return fmt.Errorf("failed to get cache product with error: %w", err)
+	}
+
+	// notfound product cache = "query db" Then "save cache".
+	if err != nil && errors.Unwrap(err).Error() == "redis: nil" {
+		fmt.Println("Get data from db.")
+		// query filter and save cache.
+		rperr := p.productRepo.GetProductyBy(filter, products)
+		if rperr != nil {
+			return rperr
+		}
+		// set product to cache.
+		SCerr := p.productRepo.SetCache(ctx, key, products)
+		if SCerr != nil {
+			return SCerr
+		}
+	} else {
+		fmt.Println("Get data from Cache")
+	}
+
 	return nil
 }

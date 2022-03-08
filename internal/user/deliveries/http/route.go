@@ -13,6 +13,6 @@ func MapUserRoute(r fiber.Router, h user.Handler) {
 	r.Post("/", h.InsertUser)
 	r.Get("/role", middleware.Authentication(), h.GetRole)
 	// require auth
-	// r.Get("/", middleware.Authentication(), h.GetProductOne)
+	// r.Get("/", middleware.Authentication(), h.GetProductById)
 	// r.Get("/all", middleware.Authentication(), h.GetProductAll)
 }

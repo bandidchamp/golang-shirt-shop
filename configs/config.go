@@ -8,6 +8,7 @@ type Config struct {
 	Fiber Fiber
 	MySQL MySQL
 	Jwt   Jwt
+	Redis Redis
 }
 
 type Fiber struct {
@@ -27,6 +28,13 @@ type MySQL struct {
 type Jwt struct {
 	Secret  string
 	Expires string
+}
+
+type Redis struct {
+	Host     string
+	Port     string
+	Password string
+	DBNumber string
 }
 
 func ReadEnvironment() error {

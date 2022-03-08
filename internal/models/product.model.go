@@ -38,6 +38,16 @@ type Product_gender struct {
 	Product_gender_name string `json:"product_gender_name" gorm:"size:2048"`
 }
 
+type ProductFilter struct {
+	Name     string `json:"name"`
+	Catagory string `json:"catagory"`
+	Size     string `json:"size"`
+	Gender   string `json:"gender"`
+	Limit    string `json:"limit"`
+	Offset   string `json:"offset"`
+	OrderBy  string `json:"orderby"`
+}
+
 func (product *Product) TableName() string {
 	return "product"
 }

@@ -14,3 +14,23 @@ services:
       - '${MYSQL_PORT}'
     volumes:
       - ./data/mysql:/var/lib/mysql
+
+  cache:
+    container_name: redis
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - "${REDIS_PORT}:6379"
+    command: redis-server --save 60 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - ./data/cache:/data
+    networks:
+      - network-backend
+
+networks:
+  network-backend:
+    driver: bridge
+
+volumes:
+  db:
+  cache:
