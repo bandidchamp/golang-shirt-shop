@@ -11,8 +11,8 @@ type Product struct {
 	Catagory  int     `json:"catagory" gorm:"size:64" validate:"required"`
 	Size      int     `json:"size" gorm:"size:64" validate:"required"`
 	Gender    int     `json:"gender" gorm:"size:64" validate:"required"`
-	Price     float32 `json:"price" gorm:"size:64" validate:"required"`
-	Quantiry  float32 `json:"quantity" gorm:"size:64" validate:"required"`
+	Price     float64 `json:"price" gorm:"size:64" validate:"required"`
+	Quantiry  float64 `json:"quantity" gorm:"size:64" validate:"required"`
 	Ispadding bool    `json:"ispadding" gorm:"size:1"`
 }
 

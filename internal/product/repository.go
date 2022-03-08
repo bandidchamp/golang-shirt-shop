@@ -18,5 +18,6 @@ type RopoInterface interface {
 	SetCache(ctx context.Context, key string, value *[]models.Product) error
 
 	InsertProduct(product *models.ProductForm) error
-	UpdateProduct(pid string, ProductForm *models.ProductForm, Product *models.Product) error
+	UpdateProduct(Product *models.Product) error
+	PaddingProduct(Product *models.Product) error
 }

@@ -16,4 +16,5 @@ type UCInterface interface {
 
 	InsertProduct(*models.ProductForm) error
 	UpdateProduct(pid string, productF *models.ProductForm, product *models.Product) error
+	PaddingProduct(pid string, padding bool, product *models.Product) error
 }

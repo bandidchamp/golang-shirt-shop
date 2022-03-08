@@ -12,4 +12,6 @@ type Handler interface {
 	Gender(c *fiber.Ctx) error
 	Catagory(c *fiber.Ctx) error
 	GetProductFilter(c *fiber.Ctx) error
+	UpdateProduct(c *fiber.Ctx) error
+	PaddingProduct(c *fiber.Ctx) error
 }
