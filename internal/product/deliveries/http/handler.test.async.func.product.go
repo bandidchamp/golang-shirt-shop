@@ -26,12 +26,13 @@ func testThread(i int) {
 	fmt.Println("async function testThread :", i)
 }
 
-func FindProduct(phh *productHandler, id string, a chan models.Product, i int) {
+func FindProduct(phh *productHandler, id string, c chan models.Product, i int) {
+	fmt.Println("query product", i)
 	productS, err := phh.productUC.CheckProductID(id)
 	if err != nil {
 		fmt.Println(err)
 	}
-	a <- *productS
+	c <- *productS
 }
 
 func (ph *productHandler) AsyncFunc(c *fiber.Ctx) error {
@@ -42,14 +43,14 @@ func (ph *productHandler) AsyncFunc(c *fiber.Ctx) error {
 		return err
 	}
 
-	prodmap := make(chan models.Product)
+	productChannel := make(chan models.Product)
 
 	var ssssss []models.Product
 
 	for i, val := range payload.Ids {
-		go FindProduct(ph, strconv.FormatInt(int64(val), 10), prodmap, i)
+		go FindProduct(ph, strconv.FormatInt(int64(val), 10), productChannel, i)
 		// fmt.Println(<-prodmap)
-		ssssss = append(ssssss, <-prodmap)
+		ssssss = append(ssssss, <-productChannel)
 	}
 
 	fmt.Println("-----------------------")
