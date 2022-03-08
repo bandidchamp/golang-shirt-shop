@@ -27,9 +27,22 @@ CREATE TABLE IF NOT EXISTS `order` (
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=317 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table shirt-shop.order: ~7 rows (approximately)
+-- Dumping data for table shirt-shop.order: ~0 rows (approximately)
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
+
+-- Dumping structure for table shirt-shop.order_item
+CREATE TABLE IF NOT EXISTS `order_item` (
+  `order_item_id` int NOT NULL AUTO_INCREMENT,
+  `order_item_quantity` int DEFAULT NULL,
+  `order_item_product_id` int DEFAULT NULL,
+  `order_id` int DEFAULT NULL,
+  PRIMARY KEY (`order_item_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3019 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table shirt-shop.order_item: ~13 rows (approximately)
+/*!40000 ALTER TABLE `order_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `order_item` ENABLE KEYS */;
 
 -- Dumping structure for table shirt-shop.order_status
 CREATE TABLE IF NOT EXISTS `order_status` (
@@ -60,18 +73,18 @@ CREATE TABLE IF NOT EXISTS `product` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table shirt-shop.product: ~0 rows (approximately)
+-- Dumping data for table shirt-shop.product: ~8 rows (approximately)
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
 REPLACE INTO `product` (`id`, `name`, `catagory`, `size`, `gender`, `price`, `quantiry`, `ispadding`) VALUES
-	(1, 'shirt', 1, 11, 111, 000000001111, 11111, NULL),
-	(2, 'shirt-2', 2, 22, 222, 000000002222, 22222, NULL),
-	(3, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, NULL),
-	(4, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, NULL),
-	(5, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, NULL),
-	(6, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, NULL),
-	(7, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, NULL),
-	(8, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, NULL),
-	(9, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, NULL);
+	(1, 'shirt', 1, 11, 111, 000000001111, 11111, 0),
+	(2, 'shirt-2', 2, 22, 222, 000000002222, 22222, 0),
+	(3, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, 0),
+	(4, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, 0),
+	(5, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, 0),
+	(6, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, 0),
+	(7, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, 0),
+	(8, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, 0),
+	(9, 'กางเกงขายาว', 2, 3, 4, 000000000005, 6, 0);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
 -- Dumping structure for table shirt-shop.product_catagory
@@ -130,23 +143,12 @@ CREATE TABLE IF NOT EXISTS `role` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table shirt-shop.role: ~2 rows (approximately)
+-- Dumping data for table shirt-shop.role: ~0 rows (approximately)
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
 REPLACE INTO `role` (`id`, `name`) VALUES
 	(1, 'admin'),
 	(2, 'user');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
-
--- Dumping structure for table shirt-shop.roles
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `name` longtext,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table shirt-shop.roles: ~0 rows (approximately)
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
 -- Dumping structure for table shirt-shop.user
 CREATE TABLE IF NOT EXISTS `user` (
@@ -155,17 +157,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   `surname` varchar(128) DEFAULT NULL,
   `username` varchar(128) DEFAULT NULL,
   `hash` varchar(2048) DEFAULT NULL,
-  `rold` bigint DEFAULT NULL,
   `role` bigint DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table shirt-shop.user: ~0 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-REPLACE INTO `user` (`id`, `name`, `surname`, `username`, `hash`, `rold`, `role`) VALUES
-	(1, 'บัณฑิต', 'คุ้มสวัสดิ์', 'bandid12', '44s4455ddd', 1, NULL),
-	(2, 'มานี', 'มีนา', 'mena', '$2a$08$hAm86bcUwEJOzcG8NKjh.OyOH3Emx2voCQltsZpLBsr1VZlCzP6mi', 2, NULL),
-	(3, 'มานีมา', 'มีนามา', 'menana', '$2a$08$wqGi9id4.2SpDat4RRo1/e0SkRBWUozhBYkh.54Y8Z3Mj7D2OyHla', 2, NULL);
+REPLACE INTO `user` (`id`, `name`, `surname`, `username`, `hash`, `role`) VALUES
+	(1, 'บัณฑิต', 'คุ้มสวัสดิ์', 'bandid12', '44s4455ddd', 1),
+	(2, 'มานี', 'มีนา', 'mena', '$2a$08$hAm86bcUwEJOzcG8NKjh.OyOH3Emx2voCQltsZpLBsr1VZlCzP6mi', 2),
+	(3, 'มานีมา', 'มีนามา', 'menana', '$2a$08$wqGi9id4.2SpDat4RRo1/e0SkRBWUozhBYkh.54Y8Z3Mj7D2OyHla', 2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

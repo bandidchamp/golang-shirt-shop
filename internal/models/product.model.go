@@ -6,14 +6,14 @@ var GenderTname string = ProductTname + "_gender"
 var CatagoryTname string = ProductTname + "_catagory"
 
 type Product struct {
-	Id        int     `json:"id"`
-	Name      string  `json:"name"`
-	Catagory  int     `json:"catagory"`
-	Size      int     `json:"size"`
-	Gender    int     `json:"gender"`
-	Price     float32 `json:"price"`
-	Quantiry  float32 `json:"quantity"`
-	Ispadding bool    `json:"ispadding"`
+	Id        int     `json:"id" gorm:"size:64"`
+	Name      string  `json:"name" gorm:"size:4096" validate:"required"`
+	Catagory  int     `json:"catagory" gorm:"size:64" validate:"required"`
+	Size      int     `json:"size" gorm:"size:64" validate:"required"`
+	Gender    int     `json:"gender" gorm:"size:64" validate:"required"`
+	Price     float32 `json:"price" gorm:"size:64" validate:"required"`
+	Quantiry  float32 `json:"quantity" gorm:"size:64" validate:"required"`
+	Ispadding bool    `json:"ispadding" gorm:"size:1"`
 }
 
 type ProductForm struct {
@@ -26,16 +26,16 @@ type ProductForm struct {
 }
 
 type Product_size struct {
-	Product_size_id   int    `json:"product_size_id"`
-	Product_size_name string `json:"product_size_name"`
+	Product_size_id   int    `json:"product_size_id" gorm:"size:64"`
+	Product_size_name string `json:"product_size_name" gorm:"size:2048"`
 }
 type Product_catagory struct {
-	Product_catagory_id   int    `json:"product_catagory_id"`
-	Product_catagory_name string `json:"product_catagory_name"`
+	Product_catagory_id   int    `json:"product_catagory_id" gorm:"size:64"`
+	Product_catagory_name string `json:"product_catagory_name" gorm:"size:2048"`
 }
 type Product_gender struct {
-	Product_gender_id   int    `json:"product_gender_id"`
-	Product_gender_name string `json:"product_gender_name"`
+	Product_gender_id   int    `json:"product_gender_id" gorm:"size:64"`
+	Product_gender_name string `json:"product_gender_name" gorm:"size:2048"`
 }
 
 func (product *Product) TableName() string {
