@@ -18,7 +18,7 @@ require (
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
 	github.com/go-redis/redis/v8 v8.11.4 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
-	github.com/gofiber/fiber/v2 v2.28.0 // indirect
+	github.com/gofiber/fiber/v2 v2.29.0 // indirect
 	github.com/gofiber/jwt/v2 v2.2.7 // indirect
 	github.com/golang-jwt/jwt/v4 v4.3.0 // indirect
 	github.com/jcchavezs/porto v0.4.0 // indirect
@@ -35,7 +35,7 @@ require (
 	github.com/radovskyb/watcher v1.0.7 // indirect
 	github.com/santhosh-tekuri/jsonschema v1.2.4 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.33.0 // indirect
+	github.com/valyala/fasthttp v1.34.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	go.elastic.co/apm v1.15.0 // indirect
 	go.elastic.co/fastjson v1.1.0 // indirect

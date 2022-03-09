@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-redis/redis/v8"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"gorm.io/gorm"
 )
 
@@ -29,6 +30,14 @@ func (s *Server) StartServer() error {
 
 	// map handle here.
 	s.MapHandlers(s.fiber)
+
+	s.fiber.Use(
+		cors.New(cors.Config{
+			AllowOrigins:     "example.com, dev.info, bandid.info, localhost:3000",
+			AllowMethods:     "GET,POST,PUT,PATCH,DELETE",
+			AllowCredentials: true,
+		}),
+	)
 
 	err := s.fiber.Listen(fmt.Sprintf(`%s:%s`, s.cfg.Fiber.Host, s.cfg.Fiber.Port))
 	if err != nil {

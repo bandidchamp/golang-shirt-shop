@@ -27,7 +27,8 @@ func testThread(i int) {
 }
 
 func FindProduct(phh *productHandler, id string, c chan models.Product, i int) {
-	// fmt.Println("query product", i)
+
+	fmt.Println("query product", i)
 	productS, err := phh.productUC.CheckProductID(id)
 	if err != nil {
 		fmt.Println(err)
@@ -48,8 +49,17 @@ func (ph *productHandler) AsyncFunc(c *fiber.Ctx) error {
 	var resultproductChannel []models.Product
 
 	for i, val := range payload.Ids {
+		// go func(i int, val int) {
+		// 	fmt.Println(val)
+		// 	productS, err := ph.productUC.CheckProductID(strconv.FormatInt(int64(val), 10))
+		// 	if err != nil {
+		// 		fmt.Println(err)
+		// 	}
+		// 	resultproductChannel = append(resultproductChannel, *productS)
+		// }(i, val)
+		// fmt.Println("loop print ", i)
 		go FindProduct(ph, strconv.FormatInt(int64(val), 10), productChannel, i)
-		// fmt.Println(<-prodmap)
+		// // fmt.Println(<-prodmap)
 		resultproductChannel = append(resultproductChannel, <-productChannel)
 	}
 
