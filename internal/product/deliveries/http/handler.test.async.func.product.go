@@ -62,7 +62,7 @@ func (ph *productHandler) AsyncFunc(c *fiber.Ctx) error {
 		// // fmt.Println(<-prodmap)
 		resultproductChannel = append(resultproductChannel, <-productChannel)
 	}
-
+	close(productChannel)
 	// fmt.Println("-----------------------")
 	// fmt.Println(resultproductChannel)
 	// fmt.Println("-----------------------")
