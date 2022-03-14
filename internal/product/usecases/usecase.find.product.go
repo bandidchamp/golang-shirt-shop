@@ -71,14 +71,14 @@ func (p *productUC) GetProduct(ctx context.Context, filter *models.ProductFilter
 	if err != nil && errors.Unwrap(err).Error() == "redis: nil" {
 		fmt.Println("Get data from db.")
 		// query filter and save cache.
-		rperr := p.productRepo.GetProductyBy(filter, products)
-		if rperr != nil {
-			return rperr
+		err = p.productRepo.GetProductyBy(filter, products)
+		if err != nil {
+			return err
 		}
 		// set product to cache.
-		SCerr := p.productRepo.SetCache(ctx, key, products)
-		if SCerr != nil {
-			return SCerr
+		err = p.productRepo.SetCache(ctx, key, products)
+		if err != nil {
+			return err
 		}
 	} else {
 		fmt.Println("Get data from Cache")
