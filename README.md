@@ -13,3 +13,12 @@ CompileDaemon --build="go build ./cmd/main.go" --command=./main.exe
 go get github.com/githubnemo/CompileDaemon
  <br/>
 </p>
+
+<p>
+    <h5>Note:</h5>
+    name case         case              example
+    camel  case  -->  camelCase         productName
+    pascal case  -->  PacalCase         ProductName
+    snake  case  -->  snack_case        product_name
+    kebab  case  -->  kebab-case        product-name
+</p>

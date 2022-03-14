@@ -3,6 +3,11 @@ module shirt-shop
 go 1.17
 
 require (
+	github.com/gofiber/fiber/v2 v2.29.0
+	
+)
+
+require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/armon/go-radix v1.0.0 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect

@@ -3,7 +3,7 @@ services:
   # backend-app:
   #   build:
   #     context: .
-  #     dockerfile: Dockerfile
+  #     dockerfile: Dockerfile.dev
   #   image: api:latest
   #   container_name: api
   #   volumes:

@@ -3,11 +3,12 @@ package http
 import (
 	"fmt"
 	"os"
+	"strconv"
+	"time"
+
 	"shirt-shop/interfaces"
 	"shirt-shop/internal/authen"
 	"shirt-shop/internal/models"
-	"strconv"
-	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
